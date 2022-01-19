@@ -1,0 +1,158 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Class;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Enrique
+ */
+public class Electrodomesticos {
+    protected double precio;
+    protected String color;
+    protected char consumo;
+    protected double peso;
+    private Scanner leer= new Scanner(System.in).useDelimiter("\n");
+
+    public Electrodomesticos() {
+    }
+
+    public Electrodomesticos(double precio, String color, char consumo, double peso) {
+        this.precio = precio;
+        this.color = color;
+        this.consumo = consumo;
+        this.peso = peso;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public char getConsumo() {
+        return consumo;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setConsumo(char consumo) {
+        this.consumo = consumo;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    @Override
+    public String toString() {
+        return "Electrodomesticos{" + "precio=" + precio + ", color=" + color + ", consumo=" + consumo + ", peso=" + peso + '}';
+    }
+
+    // Método comprobarConsumoEnergetico(char letra): comprueba que la letra
+    // es correcta, sino es correcta usara la letra F por defecto. Este método se debe
+    // invocar al crear el objeto y no será visible.
+    public void comprobarConsumoEnergetico(char letra){
+        letra= Character.toUpperCase(letra);
+        
+        if(letra=='A' || letra=='B' || letra=='C' || letra=='D' || letra=='E'){
+            letra=letra;
+        }else{
+            letra='F';
+        }
+    }
+    
+    //Método comprobarColor(String color): comprueba que el color es correcto, y
+    //si no lo es, usa el color blanco por defecto. Los colores disponibles para los
+    //electrodomésticos son blanco, negro, rojo, azul y gris. No importa si el nombre
+    //está en mayúsculas o en minúsculas. Este método se invocará al crear el
+    //objeto y no será visible.
+    
+    public void comprobarColor(String color){
+        
+        if(color.equalsIgnoreCase("blanco") || color.equalsIgnoreCase("negro") || color.equalsIgnoreCase("rojo") || color.equalsIgnoreCase("azul") || color.equalsIgnoreCase("gris")){
+            color= color;
+        }else{
+            color="blanco";
+        }
+    }
+    
+    //Metodo crearElectrodomestico(): le pide la información al usuario y llena el
+    //electrodoméstico, también llama los métodos para comprobar el color y el
+    //consumo. Al precio se le da un valor base de $1000.
+    
+    public void crearElectrodomestico(){
+        System.out.println("Ingrese la información del Electrodoméstico.");
+        
+        double p= 1000;
+        System.out.print("Color: ");
+        String col= leer.next();
+        comprobarColor(col);
+        System.out.print("Consumo Energético (A-F): ");
+        String aux= leer.next();
+        char cons= aux.charAt(0);
+        comprobarConsumoEnergetico(cons);
+        System.out.print("Peso: ");
+        double pe= leer.nextDouble();
+        
+        setPrecio(p);
+        setColor(col);
+        setConsumo(cons);
+        setPeso(pe);
+        
+    }
+    
+    //Método precioFinal(): según el consumo energético y su tamaño, aumentará
+    //el valor del precio.
+    
+    public void precioFinal(char cons, double peso){
+        double precio= getPrecio();
+
+        switch(cons){
+            case 'a':
+                precio=1000;
+                break;
+            case 'b':
+                precio=800;
+                break;
+            case 'c':
+                precio=600;
+                break;
+            case 'd':
+                precio=500;
+                break;
+            case 'e':
+                precio=300;
+                break;
+            default:
+                precio=100;
+        }
+        
+        if(peso>=1 && peso<=19){
+            precio=precio+100;
+        }else if(peso>=20 && peso<=49){
+            precio=precio+500;
+        }else if(peso>=50 && peso<=79){
+            precio=precio+800;
+        }else if(peso>80){
+            precio=precio+1000;
+        }
+        setPrecio(precio);
+    }
+}
