@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Class;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Enrique
+ */
+public class Lavadora extends Electrodomesticos {
+    private int carga;
+    private Scanner leer= new Scanner(System.in).useDelimiter("\n");
+    
+    public Lavadora() {
+    }
+
+    public Lavadora(int carga, double precio, String color, char consumo, double peso) {
+        super(precio, color, consumo, peso);
+        this.carga= carga;
+    }
+
+    public int getCarga() {
+        return carga;
+    }
+
+    public void setCarga(int carga) {
+        this.carga = carga;
+    }
+
+    //Método crearLavadora (): este método llama a crearElectrodomestico() de la
+    //clase padre, lo utilizamos para llenar los atributos heredados del padre y
+    //después llenamos el atributo propio de la lavadora.
+    
+    public void crearLavadora(){
+        crearElectrodomestico();
+        System.out.print("Carga: ");
+        int carga= leer.nextInt();
+        setCarga(carga);
+    }
+    
+    @Override
+    public void precioFinal(char cons, double pe){
+        super.precioFinal(cons, pe);
+        if(getCarga()>30){
+            double nuevoPrecio=getPrecio()+500;
+            super.setPrecio(nuevoPrecio);
+        }
+        
+        System.out.println("El precio final de la Lavadora es $"+getPrecio()+".");
+        
+    }
+    
+    public void mostrarLavadora(){
+        System.out.println("");        
+        System.out.println("----------------");        
+        System.out.println("");
+        System.out.println("Precio: "+getPrecio());
+        System.out.println("Color: "+getColor());
+        System.out.println("Consumo: "+getConsumo());
+        System.out.println("Peso: "+getPeso());
+        System.out.println("Carga: "+getCarga());
+        System.out.println("");
+
+    }
+}
