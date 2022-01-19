@@ -1,0 +1,102 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Class;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Enrique
+ */
+public class Televisor extends Electrodomesticos{
+    private int resolucion;
+    private boolean sintonizador;
+    private Scanner leer= new Scanner(System.in);
+
+    public Televisor() {
+    }
+    
+    public Televisor(int resolucion, boolean sintonizador, double precio, String color, char consumo, double peso){
+        super(precio, color, consumo, peso);
+        this.resolucion= resolucion;
+        this.sintonizador= sintonizador;
+    }
+
+    public int getResolucion() {
+        return resolucion;
+    }
+
+    public boolean isSintonizador() {
+        return sintonizador;
+    }
+
+    public void setResolucion(int resolucion) {
+        this.resolucion = resolucion;
+    }
+
+    public void setSintonizador(boolean sintonizador) {
+        this.sintonizador = sintonizador;
+    }
+    
+    // Método crearTelevisor(): este método llama a crearElectrodomestico() de la
+    // clase padre, lo utilizamos para llenar los atributos heredados del padre y
+    // después llenamos los atributos del televisor.
+    
+       public void crearTelevisor(){
+        crearElectrodomestico();
+        System.out.print("Resolución: ");
+        int resolucion= leer.nextInt();
+        setResolucion(resolucion);
+           System.out.println("Sintonizador SI/NO");
+        boolean sintonizador=false;
+        String respuesta= leer.next();
+            if(respuesta.equalsIgnoreCase("si")){
+                sintonizador = true;
+            }
+        }
+    
+    // Método precioFinal(): este método será heredado y se le sumará la siguiente
+    // funcionalidad. Si el televisor tiene una resolución mayor de 40 pulgadas, se
+    // incrementará el precio un 30% y si tiene un sintonizador TDT incorporado,
+    // aumentará $500. Recuerda que las condiciones que hemos visto en la clase
+    // Electrodomestico también deben afectar al precio.
+    @Override
+    public void precioFinal(char cons, double pe){
+        super.precioFinal(cons, pe);
+        double nuevoPrecio=getPrecio();
+        
+        if(getResolucion()>40){
+            nuevoPrecio= nuevoPrecio + nuevoPrecio*30/100;
+            
+        }
+        if(isSintonizador()==true){
+            nuevoPrecio= nuevoPrecio+500;
+        }
+        super.setPrecio(nuevoPrecio);
+        System.out.println("El precio final del Televisor es $"+getPrecio()+".");
+        
+    }
+    
+    public void mostrarTelevisor(){
+        String respuesta;
+        if(isSintonizador()==true){
+            respuesta="SI";
+        }else{
+            respuesta="NO";
+        }
+        System.out.println("");        
+        System.out.println("----------------");        
+        System.out.println("");
+        System.out.println("Precio: "+getPrecio());
+        System.out.println("Color: "+getColor());
+        System.out.println("Consumo: "+getConsumo());
+        System.out.println("Peso: "+getPeso());
+        System.out.println("Resolucion: "+getResolucion());
+        System.out.println("Sintonizador: "+respuesta);
+
+    }
+    
+}
