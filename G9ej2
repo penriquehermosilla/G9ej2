@@ -1,0 +1,39 @@
+<!---
+
+Ejercicio 2 de la Guia 9 MAIN
+
+--->
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package g9.ej2;
+
+import Class.Lavadora;
+import Class.Televisor;
+
+/**
+ *
+ * @author Enrique
+ */
+public class G9Ej2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        Lavadora lavadora= new Lavadora();
+        lavadora.crearLavadora();
+        Televisor televisor=new Televisor();
+        televisor.crearTelevisor();
+        lavadora.precioFinal(lavadora.getConsumo(), lavadora.getPeso());
+        televisor.precioFinal(televisor.getConsumo(), televisor.getPeso());
+        System.out.println("Vamos a mostrar el detalle de los productos:");
+        lavadora.mostrarLavadora();
+        televisor.mostrarTelevisor();
+        
+    }
+    
+}
